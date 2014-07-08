@@ -1,0 +1,9 @@
+Package: biomon_core
+Type: Package
+Title: Biomonitoring data analysis tool
+Version: 1.0
+Date: 2014-07-07
+Author: Rodrigo Bühler
+Maintainer: Rodrigo Bühler <rodrigo.buhler@ymail.com>
+Description: Biomon core is the central application of the Biomon data analysis tool.
+License: Still thinking about :o
