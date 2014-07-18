@@ -1,0 +1,1 @@
+Square	sqrt	9			Mean	mean	"7,3"			Median	median	"2,8,10"			Print	print	Print!			
