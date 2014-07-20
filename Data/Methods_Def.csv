@@ -1,2 +1,7 @@
-Mean,mean,I,7,I,3,Median,median,I,2,I,8,I,10Print,print,C,Print!,,
-Squared_root,sqrt,I,9,,
+Mean,mean,numeric,7,numeric,3,
+Median,median,numeric  ,2,numeric,4,numeric,10
+Print,print,character,Print!,,
+Square ,sqrt,numeric,9,,
+Max,max,@,2,@,4
+Result2,print,character,Result2:,@,2
+Result3,print,character,Result3:,@,3
