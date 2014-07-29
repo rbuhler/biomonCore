@@ -1,0 +1,7 @@
+1,File,as.character,character,/Users/rodrigobuhler/Dev/R/biomon_core/Data/Sample_vs_Attribute_Matrix_E.csv,,,,,,,,,,
+2,Header,as.logical,logical,TRUE,,,,,,,,,,
+3,Separation,as.character,character,",",,,,,,,,,,
+4,Quote,as.character,character,,,,,,,,,,,
+5,Decimal,as.character,character,.,,,,,,,,,,
+6,Names,as.numeric,numeric,1,,,,,,,,,,
+7,Matrix,read.table,@,1,@,2,@,3,@,4,@,5,@,6
