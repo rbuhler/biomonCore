@@ -1,9 +1,10 @@
-Package: biomoncore
+Package: biomonCore
 Type: Package
 Title: Biomonitoring data analysis tool
-Version: 1.0
-Date: 2014-07-07
+Version: 1.51
+Date: 2014-09-02
 Author: Rodrigo Buhler
 Maintainer: Rodrigo Buhler <rodrigo.buhler@ymail.com>
+Depends: R (>= 1.8.0), stringr
 Description: Biomon core is the central application of the Biomon data analysis tool.
-License: Still thinking about :)
+License: GPL (<=2)

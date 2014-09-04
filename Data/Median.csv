@@ -1,5 +1,0 @@
-1,var1,as.numeric,numeric,4,,,,
-2,var2,as.numeric,numeric,8,,,,
-3,var3,as.numeric,numeric,9,,,,
-4,Vector,as.vector,@,1,@,2,@,3
-5,Median,median,@,4,,,,

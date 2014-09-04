@@ -3,36 +3,34 @@
 # ***************************************
 # Author: Rodrigo Bühler
 # July 2014
-# Version 1.10
+# Version 1.51
 # ***************************************
 
 # **************************************
 # MAIN METHOD
 # **************************************
 biomon_run <- function(i_analysis) {
-  # **************************************
-  # METHOD - Packages check
-  # **************************************
-  pck_chk <- function(){
-    # STRINGR
-    chk <- find.package("stringr")
-    if(is.na(chk)){
-      install.packages("stringr", dependencies=TRUE)
-    }
-    require(stringr)
-  }
+  
   # **************************************
   # METHOD - Data load
   # **************************************
   data_load <- function(i_file, i_header){  
     file   <- i_file
     header <- i_header
+    data   <- NA
     #---
     path   <- file
-    data   <- read.csv (file = path, header=header, stringsAsFactors = FALSE, row.names = 1)
+      tryCatch({
+        data   <- read.csv (file = path, header=header, stringsAsFactors = FALSE, row.names = 1)},
+        error = function( e ){
+            message('ERROR >> ', e)
+            stop},
+        warning = function( w ){
+            message('WARNING >> ', w)
+            stop}) 
     #---
-    o_data <- data
-    return(o_data)
+  o_data <- data
+  return(o_data)
   }  
   # **************************************
   # METHOD - Coerce
@@ -80,7 +78,7 @@ biomon_run <- function(i_analysis) {
   # **************************************
   # PRE LOAD CALLS
   # **************************************
-    pck_chk() # Check for necessary packages
+#     pck_chk() # Check for necessary packages
   # **************************************
   # MAIN BODY
   # **************************************
@@ -97,13 +95,20 @@ biomon_run <- function(i_analysis) {
     parameters <- list()
     param_idx  <- 0
 # Get the short text - 1st position    
-    shorttext  <- techniques[x,1]
+    tryCatch(
+      shorttext  <- techniques[x,1],
+        
+      error = function( err ){ message('ERROR >> ', err) 
+                               stop(call. = FALSE)},
+      warning = function( w ){ message('WARNING >> ', w)
+                               stop(call. = FALSE)}
+    ) 
 # Get the method     - 2nd position    
     method     <- techniques[x,2]  
 # Columns of parameters
     for (i in PARM_POINTER: var_size) { 
 # Get the parameters - 3rd and others
-      typ  = str_trim(techniques[x,i])
+      typ = str_trim(techniques[x,i])
       var = str_trim(techniques[x,i+1])
 # Parameter is an already calculated value typ='@'
       if(typ == AT && !is.na(typ)){
@@ -140,20 +145,6 @@ biomon_run <- function(i_analysis) {
 # Put the result in a stack
       ret_lst <- list(shorttext, ret_val, ret_typ)
       result[x] <- list(ret_lst)
-# Print the current result
-# print(c(x, ret_lst[[1]], "<-",ret_lst[[2]]), quote=FALSE)
     }
-# print("end.")
 return(ret_val)
 }
-
-# ***************************************
-# MAIN
-# source("./R/biomoncore.R")
-# ***************************************
-# l_analysis <- "/Users/rodrigobuhler/Dev/R/biomon_core/Data/Mean.csv"
-l_analysis <- "/Users/rodrigobuhler/Dev/R/biomon_core/Data/Median.csv"
-# l_analysis <- "/Users/rodrigobuhler/Dev/R/biomon_core/Data/ReadTable.csv"
-# l_analysis <- "/Users/rodrigobuhler/Dev/R/biomon_core/Data/PCA.csv"
-message <- biomon_run(l_analysis)
-print(message)
