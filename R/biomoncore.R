@@ -9,18 +9,17 @@
 # **************************************
 # MAIN METHOD
 # **************************************
-biomon_run <- function(i_analysis_file) {
+biomon_run <- function(i_analysis) {
   
   # **************************************
   # METHOD - Data load
-  # STEP 1 - Load the Analysis file to an internal matrix  
   # **************************************
   data_load <- function(i_file, i_header){  
     file   <- i_file
     header <- i_header
     data   <- NA
+    #---
     path   <- file
-  #---
       tryCatch({
         data   <- read.csv (file = path, header=header, stringsAsFactors = FALSE, row.names = 1)},
         error = function( e ){
@@ -29,18 +28,17 @@ biomon_run <- function(i_analysis_file) {
         warning = function( w ){
             message('WARNING >> ', w)
             stop}) 
+    #---
   o_data <- data
   return(o_data)
   }  
   # **************************************
   # METHOD - Coerce
-  # STEP ? - Object type casting
   # **************************************
   coerce <- function(i_type, i_variable){
     type     <- i_type
     variable <- i_variable
     ret   <- c()
-  #---
     switch(type,
            numeric={
              ret <- as.numeric(variable)
@@ -62,12 +60,13 @@ biomon_run <- function(i_analysis_file) {
            },
            ret <- variable
     )
+    #
     o_return <- ret
     return(o_return)
   }
-  # **************************************
-  # CONSTANTS
-  # **************************************
+# **************************************
+# CONSTANTS
+# **************************************
   AT   <- "@"
   NUM  <- "numeric"
   DBL  <- "double"
@@ -77,14 +76,18 @@ biomon_run <- function(i_analysis_file) {
   LIS  <- "list"
   PARM_POINTER <- 3 # fist position of the parameters
   # **************************************
+  # PRE LOAD CALLS
+  # **************************************
+#     pck_chk() # Check for necessary packages
+  # **************************************
   # MAIN BODY
   # **************************************
-  analysis_file   <- i_analysis_file
-  techniques_mtx <- data_load(analysis_file, FALSE)
-  obs_size   <- length(techniques_mtx[[1]]) # Lines
-  var_size   <- length(techniques_mtx) # Columns
-  result     <- list() # Execution results
-  #---
+  analysis  <- i_analysis
+  techniques <- data_load(analysis, FALSE)
+# --  
+  obs_size  <- length(techniques[[1]]) # Lines
+  var_size  <- length(techniques) # Columns
+  result    <- list() # Execution results
 # Lines of methods
   for (x in 1: obs_size) { 
     shorttext  <- c()
@@ -93,7 +96,7 @@ biomon_run <- function(i_analysis_file) {
     param_idx  <- 0
 # Get the short text - 1st position    
     tryCatch(
-      shorttext  <- techniques_mtx[x,1],
+      shorttext  <- techniques[x,1],
         
       error = function( err ){ message('ERROR >> ', err) 
                                stop(call. = FALSE)},
@@ -101,12 +104,12 @@ biomon_run <- function(i_analysis_file) {
                                stop(call. = FALSE)}
     ) 
 # Get the method     - 2nd position    
-    method     <- techniques_mtx[x,2]  
+    method     <- techniques[x,2]  
 # Columns of parameters
     for (i in PARM_POINTER: var_size) { 
 # Get the parameters - 3rd and others
-      typ = str_trim(techniques_mtx[x,i])
-      var = str_trim(techniques_mtx[x,i+1])
+      typ = str_trim(techniques[x,i])
+      var = str_trim(techniques[x,i+1])
 # Parameter is an already calculated value typ='@'
       if(typ == AT && !is.na(typ)){
         index <- coerce(DBL, var) # var is a position not a value
