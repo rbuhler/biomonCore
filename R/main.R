@@ -1,4 +1,6 @@
-source("R/ClassGlobal.R");
-source("R/ClassAssert.R");
-source("R/ClassAnalyz.R");
-source("R/testAnalyz.R")
+# library(analyz)
+# #--- Create the objects 
+# chk <- new("Assert")
+# 
+# source("R/ClassAction.R")
+# source("tests/test.R")

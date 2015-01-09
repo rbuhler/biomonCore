@@ -1,0 +1,4 @@
+1,Order,order,numeric,3,numeric,5,numeric,6
+2,Sum,sum,numeric,3,numeric,5,numeric,6
+3,Median,median,numeric,3,numeric,5,numeric,6
+4,Mean,mean,numeric,3,numeric,5,numeric,6
