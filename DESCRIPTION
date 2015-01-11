@@ -1,11 +1,11 @@
 Package: biomonCore
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: Package BiomonCore
+Version: 1.2.00
 Date: 2014-10-10
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-Suggests:
-    methods
-License: GPL-2
+Author: Rodrigo Bühler
+Maintainer: Rodrigo Buhler <rodrigo.buhler@ymail.com>
+Description: This package acts such a controller, where calls from a view module 
+are forwarded to the model layer, in this particular case the package analyz.
+License: GPL (>=2)
+Depends: methods (>= 3.0.2)

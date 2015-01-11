@@ -3,12 +3,12 @@
 \alias{Action.btnExecute}
 \title{Action.btnExecute}
 \usage{
-Action.btnExecute(object, anlzFile)
+Action.btnExecute(object, pathList)
 }
 \arguments{
 \item{object}{Description.}
 
-\item{anlzFile}{The path and file name of the analysis CSV file.}
+\item{pathList}{A list with the paths of the CSV files.}
 }
 \value{
 result The return states the number of results reached or zero when something went wrong.
