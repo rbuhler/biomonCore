@@ -1,5 +1,6 @@
 Package: biomonCore
 Type: Package
+<<<<<<< HEAD
 Title: Package BiomonCore
 Version: 1.2.00
 Date: 2014-10-10
@@ -9,3 +10,13 @@ Description: This package acts such a controller, where calls from a view module
 are forwarded to the model layer, in this particular case the package analyz.
 License: GPL (>=2)
 Depends: methods (>= 3.0.2)
+=======
+Title: Biomonitoring data analysis tool
+Version: 1.51
+Date: 2014-09-02
+Author: Rodrigo Buhler
+Maintainer: Rodrigo Buhler <rodrigo.buhler@ymail.com>
+Depends: R (>= 1.8.0), stringr
+Description: Biomon core is the central application of the Biomon data analysis tool.
+License: GPL (<=2)
+>>>>>>> FETCH_HEAD
