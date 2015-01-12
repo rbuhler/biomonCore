@@ -2,12 +2,12 @@
 \docType{class}
 \name{Global-class}
 \alias{Global-class}
-\title{Class Global}
+\title{Class to set the Global Environment for the application Biomon.}
 \arguments{
 \item{arg}{A list of arguments to be used by the class initializer.}
 }
 \description{
-The Global class is responsible to set the Global Environment with the expected variables. The analyst will consider what is defined by this class in time of defining the CSV analysis file.
+Class Global
 }
 \section{Slots}{
 
