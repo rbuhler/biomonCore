@@ -16,14 +16,15 @@ setClass( Class="Action",
                           msgType     = 'character',
                           msgText     = 'character',
                           anlz        = 'Analyz' ),
-          validity=function(object){ 
-            #--- INSPECTOR
-            if(TRUE){
-              return(TRUE)
-            }else{
-              return(FALSE)
-            }
-          }
+          validity=function(object)
+  { 
+    #--- INSPECTOR
+    if(TRUE){
+      return(TRUE)
+    }else{
+      return(FALSE)
+    }
+  }
 )
 setMethod( f="initialize",
            signature="Action",
@@ -31,18 +32,34 @@ setMethod( f="initialize",
                                success, 
                                msgType, 
                                msgText,
-                               anlz){ 
-             #--- INITIALIZER
-             # -- Set the attibutes with the defaults
-             .Object@success <- 1
-             .Object@msgType <- 'E'
-             .Object@msgText <- 'Not Defined.'
-             .Object@anlz    <- new("Analyz")
-
-             # -- Class inspection
-             validObject(.Object)
-             return(.Object) 
-           }
+                               anlz)
+  { 
+   #--- INITIALIZER
+   #--- Load the necessary libraries
+   # Install and load required a package
+   install_load <- function (package)
+   {   
+     # if package is installed locally, load
+     if(package %in% rownames(installed.packages()))
+       do.call('library', list(package))
+     # if package is not installed locally, download, then load
+     else {
+       install.packages(package)
+       do.call('library', list(package))
+     }
+   } 
+   install_load('analyz')
+   
+   # -- Set the attibutes with the defaults
+   .Object@success <- 1
+   .Object@msgType <- 'E'
+   .Object@msgText <- 'Not Defined.'
+   .Object@anlz    <- new("Analyz")
+   
+   # -- Class inspection
+   validObject(.Object)
+   return(.Object) 
+ }
 )
 #--- SETTER
 #' Action.setSuccess 
@@ -67,11 +84,11 @@ setGeneric("Action.setSuccess<-",
 #' @aliases Action.setSuccess,Action,Action-method
 setReplaceMethod( f="Action.setSuccess",
                   signature="Action",
-                  definition=function(object, value){
-                    # -- BODY
-                    object@success <- value
-                    return(object)                       
-                  }
+                  definition=function(object, value)
+  {
+    object@success <- value
+    return(object)
+  }
 )
 #' Action.setMsgType 
 #' 
@@ -95,11 +112,11 @@ setGeneric("Action.setMsgType<-",
 #' @aliases Action.setMsgType,Action,Action-method
 setReplaceMethod( f="Action.setMsgType",
                   signature="Action",
-                  definition=function(object, value){
-                    # -- BODY
-                    object@msgType <- value
-                    return(object)                       
-                  }
+                  definition=function(object, value)
+  {
+    object@msgType <- value
+    return(object)                       
+  }
 )
 #' Action.setMsgText
 #' 
@@ -123,11 +140,11 @@ setGeneric("Action.setMsgText<-",
 #' @aliases Action.setMsgText,Action,Action-method
 setReplaceMethod( f="Action.setMsgText",
                   signature="Action",
-                  definition=function(object, value){
-                    # -- BODY
-                    object@msgText <- value
-                    return(object)                       
-                  }
+                  definition=function(object, value)
+  {
+    object@msgText <- value
+    return(object)                       
+  }
 )
 #--- GETTER
 #' Action.getSuccess 
@@ -201,7 +218,7 @@ setMethod("Action.getMsgText",
 #' Description.
 #' 
 #' @param object Description.
-#' @param pathList A list with the paths of the CSV files.
+#' @param analysisFl A list with the paths of the CSV files.
 #' @return result The return states the number of results reached or zero when something went wrong.
 #' @export
 #' @docType methods
@@ -209,50 +226,49 @@ setMethod("Action.getMsgText",
 #' 
 #' @examples
 #' obj <- new("Action")
-#' v_pthList <- list()
-#' Action.btnExecute(obj, v_pthList)
+#' v_analysisFl <- c()
+#' Action.btnExecute(obj, v_analysisFl)
 #' @export
 setGeneric("Action.btnExecute",
-          function(object, pathList){standardGeneric("Action.btnExecute")})
+          function(object, analysisFl){standardGeneric("Action.btnExecute")})
 #' @rdname Action.btnExecute-methods
 #' @aliases Action.btnExecute,Action,Action-method
 setMethod("Action.btnExecute",
           "Action",
-          function(object, pathList){ 
-            result   <- 0
-            cols     <- 0
-            lins     <- 0
-            exec     <- list()
-            result   <- data.frame
-#--- Load the analysis CSV file
-            anlzFile = pathList['analysis']
-            Analyz.loadSteps(object@anlz) <- anlzFile
-              cols <- Analyz.getNrColumns(object@anlz)
-              lins <- Analyz.getNrRows(object@anlz)           
+          function(object, analysisFl)
+  { 
+      vResult   <- 0
+      vCols     <- 0
+      vRows     <- 0
+      vExec     <- list()
+      vResult   <- data.frame
+# STEP 1 lodad the analysis steps
+        object@anlz <- Analyz.loadSteps(object@anlz, analysisFl)
+# STEP 2 get the number of read coluns
+        vCols <- Analyz.getNrColumns(object@anlz)
+# STEP 3 get the numbert of read rows
+        vRows <- Analyz.getNrRows(object@anlz)           
 
-              #--- Success test
-              if(cols > 0 & lins > 0){
-                #--- Read each line of the analysis
-                #--- Preapare the line in items
-                #--- Read the items
-                for(x in 1 : lins){
-                  Analyz.setStepItems(object@anlz) <- Analyz.getStep(object@anlz, x)
-                  exec <- Analyz.getStepItems(object@anlz)
-                  
-                  #--- Execute the command
-                  temp <- unlist(exec["parameters"])
-                  temp2 <- as.character(unlist(exec[["command"]]))
-                  
-                  Analyz.setResult(object@anlz) <- Analyz.runAnalysis(object@anlz, temp2, list(temp))
-                }
-                result <- Analyz.getResult(object@anlz, lins)
-#                 result <- lins
-              }else{
-                result <- 0
-              }
-            #--- Return
-            return(result)
+# So far so good?
+        if(vCols > 0 && vRows > 0){
+          for(x in 1 : vRows){
+# STEP 4 load the steps one-by-one
+            object@anlz <- Analyz.setStepItems(object@anlz, x)
+# STEP 5 get the current command
+            vCommand <- Analyz.getStepCommand(object@anlz)
+# STEP 6 get the current parameters
+            vParms <- Analyz.getStepParameters(object@anlz)
+# STEP 7 run the command with the paraeters
+            vResult <- Analyz.runAnalysis(object@anlz, vCommand, vParms)
+# STEP 8 store the result
+            Analyz.setResult(object@anlz) <- vResult
           }
+        }else{
+          vResult <- 'Blue'
+        }
+# Return the result of the last execution
+      return(vResult)
+    }
 )
 
 #' Action.btnExecuteEcho
@@ -277,10 +293,5 @@ setGeneric("Action.btnExecuteEcho",
 #' @aliases Action.btnExecuteEcho,Action,Action-method
 setMethod("Action.btnExecuteEcho",
           "Action",
-          function(object, string){ 
-            param <- string
-            
-            result   <- param
-            return(result)
-          }
+          function(object, string){ return(string) }
 )
