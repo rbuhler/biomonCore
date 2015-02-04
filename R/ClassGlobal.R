@@ -9,8 +9,7 @@ global <- function(arg){
 #' @param arg A list of arguments to be used by the class initializer.
 #' @slot arguments A list of arguments informed in time of creating the object.
 #' 
-#' @export
-#' 
+#' @import methods
 #' 
 setClass( Class="Global",
           representation( arguments = "list" ),
@@ -32,7 +31,7 @@ setMethod( f="initialize",
              vSepDir <- .Platform$file.sep
              
              #--- Ensure the DATA folder/directory is there
-             vDataDir <- paste0(getwd(), vSepDir, "data")
+              vDataDir <- paste0(Sys.getenv("HOME"), vSepDir, "Biomon")
              if (!file.exists(vDataDir)){
                dir.create(vDataDir, mode = "0777")
              }else{ TRUE }
@@ -45,6 +44,7 @@ setMethod( f="initialize",
                         vAnalysis_dir <- paste0(vDataDir, vSepDir,"analysis", vSepDir)
                         if (!file.exists(vAnalysis_dir)){
                           dir.create(vAnalysis_dir, mode = "0777")
+                          sampleAnalysis(vAnalysis_dir)
                         }else{ TRUE }
                         
                         #--- Matrices repository

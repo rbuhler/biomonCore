@@ -11,6 +11,9 @@ action <- function(){
 #' @slot msgText A character string with a message.
 #' @slot anlz An instance of the class Analyz.
 #' 
+#' @import methods
+#' @import analyz
+#' 
 setClass( Class="Action",
           representation( success     = 'numeric',
                           msgType     = 'character',
@@ -237,18 +240,16 @@ setMethod("Action.btnExecute",
           "Action",
           function(object, analysisFl)
   { 
-      vResult   <- 0
       vCols     <- 0
       vRows     <- 0
       vExec     <- list()
-      vResult   <- data.frame
+      vResult   <- c()
 # STEP 1 lodad the analysis steps
         object@anlz <- Analyz.loadSteps(object@anlz, analysisFl)
 # STEP 2 get the number of read coluns
         vCols <- Analyz.getNrColumns(object@anlz)
 # STEP 3 get the numbert of read rows
         vRows <- Analyz.getNrRows(object@anlz)           
-
 # So far so good?
         if(vCols > 0 && vRows > 0){
           for(x in 1 : vRows){
@@ -259,15 +260,15 @@ setMethod("Action.btnExecute",
 # STEP 6 get the current parameters
             vParms <- Analyz.getStepParameters(object@anlz)
 # STEP 7 run the command with the paraeters
-            vResult <- Analyz.runAnalysis(object@anlz, vCommand, vParms)
+            vResult <- Analyz.runAnalysis(object@anlz, vCommand, (vParms))
 # STEP 8 store the result
             Analyz.setResult(object@anlz) <- vResult
           }
         }else{
-          vResult <- 'Blue'
+          vResult <- NULL
         }
 # Return the result of the last execution
-      return(vResult)
+      return(print(vResult))
     }
 )
 
