@@ -1,0 +1,148 @@
+biomon_run
+l_analysis <- "/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/Mean.csv"#
+biomon_run(l_analysis)
+l_analysis <- "/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/Mean.csv"
+save(biomon_run(l_analysis))
+biomon_run(l_analysis)
+a = biomon_run(l_analysis)
+a
+save(a)
+save(a, file = "/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+b = load("/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+if(a == b){message("Perfect")}
+if(a =! b){message("Perfect")}
+if(a <> b){message("Perfect")}
+if(a != b){message("Perfect")}
+a = biomon_run(l_analysis)
+if(a != b){message("Perfect")}
+b
+save(biomon_run(l_analysis), file = "/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+biomon_run(l_analysis)
+save(biomon_run(l_analysis), file = "/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+a
+save(a, file = "/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+load("/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+b = load("/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+b
+b[1]
+b[1][1]
+a
+a=8
+load("/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+a
+a = biomon_run(l_analysis)
+b = biomon_run(l_analysis)
+a = NA
+if(a == b){message("Perfect")}
+load("/Users/rodrigobuhler/Dev/R/biomon_www/biomon_core_view/data/analysis/mean_result.RData")
+if(a == b){message("Perfect")}
+biomonCore.biomon_run()
+biomonCore.biomon_run(l_analysis)
+expm
+mexp
+logm
+a <- list()
+a = list()
+typeof(a)
+a = matrix()
+typeof(a)
+a = matrix
+typeof(a)
+getwd()
+installed.packages()
+argument <- list("BIOMON")
+analyzer <- analyz(argument)
+Analyz
+Analyz.getStep()
+Analyz
+analyz
+analyz("A")
+R CMD build --binary
+build --binary
+mean()
+mean(1,2)
+R CMD INSTALL
+INSTALL
+15:1?
+5 == 5.0
+getwe()
+getwd()
+read.csv("./Dev/R/biomon/data/matrices/Sample_Attributes.cvs")
+read.csv("/Dev/R/biomon/data/matrices/Sample_Attributes.cvs")
+read.csv("Dev/R/biomon/data/matrices/Sample_Attributes.cvs")
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.cvs")
+)
+paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.cvs")
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"))
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),header=FALSE)
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),row.names=TRUE)
+READ.CSV()?
+)
+read.csv()?
+)
+read.csv()
+read.csv?
+_
+?read.csv()
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),row.names=TRUE)
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"))
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),row.names=TRUE)
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),row.names)
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),header=TRUE, row.names=TRUE)
+?read.table()
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),row.names=1)
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),hear\der=TRUE, row.names=1)
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),hearder=TRUE, row.names=1)
+read.table(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),header=TRUE, row.names=1)
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),hearder=TRUE, row.names=1)
+read.csv(paste0(getwd(),"/Dev/R/biomon/data/matrices/Sample_Attributes.csv"),header=TRUE, row.names=1)
+exit
+quit
+quit()
+getwd()
+ls()
+runapp(biomon)
+install(shiny)
+library(shiny)
+runapp(biomon)
+runApp(biomon)
+runApp(biomon.zip)
+runApp()
+biomon
+rm biomonGUI
+rm(biomonGUI)
+biomon
+install()
+?install()
+install.packages("/Users/rodrigobuhler/Dev/R/biomon_2.0.tgz")
+getwed()
+getwd()
+load("biomon")
+library("biomon")
+biomon()
+install.packages("shiny")
+install.packages("R-3.1.2-mavericks.pkg")
+R.version.string
+install.package("Shiny")
+install.packages("Shiny")
+install.packages("shiny")
+exit
+exit()
+quit()
+Sys.getenv("HOME")
+getwd
+getwd()
+cd dev
+ls()
+dir()
+setwd(paste0(getwd(),"/dev/R/biomonCore"))
+getwd
+getwd()
+dir()
+devtools::build(binary = TRUE, args = c('--preclean'))
+devtools::build(binary = TRUE, args = c('--preclean'))
+pack <- "biomonCore"#
+remove.packages(pack)
+pack <- "~/Dev/R/biomonCore_1.3.00.tgz"#
+install.packages(pack, repos = NULL)
+library()

@@ -6,19 +6,13 @@ action <- function(){
 #'
 #' @title Class to handle requests form the UI of Biomon.
 #' 
-#' @slot success A numeric attribute meaning the status of the execution, where 0 is success any other number a message ID.
-#' @slot msgType A character meaning 'S' success, E' error, 'W' warning or 'I' information.
-#' @slot msgText A character string with a message.
 #' @slot anlz An instance of the class Analyz.
 #' 
 #' @import methods
 #' @import analyz
 #' 
 setClass( Class="Action",
-          representation( success     = 'numeric',
-                          msgType     = 'character',
-                          msgText     = 'character',
-                          anlz        = 'Analyz' ),
+          representation( anlz = 'Analyz' ),
           validity=function(object)
   { 
     #--- INSPECTOR
@@ -53,10 +47,6 @@ setMethod( f="initialize",
    } 
    install_load('analyz')
    
-   # -- Set the attibutes with the defaults
-   .Object@success <- 1
-   .Object@msgType <- 'E'
-   .Object@msgText <- 'Not Defined.'
    .Object@anlz    <- new("Analyz")
    
    # -- Class inspection
@@ -64,165 +54,13 @@ setMethod( f="initialize",
    return(.Object) 
  }
 )
-#--- SETTER
-#' Action.setSuccess 
-#' 
-#' Description.
-#' 
-#' @param object  Description.
-#' @param value   The infomed value states the result of an execution, where 0 is success and any other number means that an issue happens.
-#' @return object Description.
-#' @export
-#' @docType methods
-#' @rdname Action.setSuccess-methods
-#' 
-#' @examples
-#' obj <- new("Action")
-#' v_success <- numeric()
-#' Action.setSuccess(obj) <- v_success
-#' @export
-setGeneric("Action.setSuccess<-",
-           function(object, value){standardGeneric("Action.setSuccess<-")})
-#' @rdname Action.setSuccess-methods
-#' @aliases Action.setSuccess,Action,Action-method
-setReplaceMethod( f="Action.setSuccess",
-                  signature="Action",
-                  definition=function(object, value)
-  {
-    object@success <- value
-    return(object)
-  }
-)
-#' Action.setMsgType 
-#' 
-#' Description.
-#' 
-#' @param object  Description.
-#' @param value   The infomed type defines the type of the execution message, where 'S' is success, 'E' error, 'W' warning and 'I' information.
-#' @return object Description.
-#' @export
-#' @docType methods
-#' @rdname Action.setMsgType-methods
-#' 
-#' @examples
-#' obj <- new("Action")
-#' v_msgType <- character()
-#' Action.setMsgType(obj) <- v_msgType
-#' @export
-setGeneric("Action.setMsgType<-",
-           function(object, value){standardGeneric("Action.setMsgType<-")})
-#' @rdname Action.setMsgType-methods
-#' @aliases Action.setMsgType,Action,Action-method
-setReplaceMethod( f="Action.setMsgType",
-                  signature="Action",
-                  definition=function(object, value)
-  {
-    object@msgType <- value
-    return(object)                       
-  }
-)
-#' Action.setMsgText
-#' 
-#' Description.
-#' 
-#' @param object  Description.
-#' @param value   The informed string describes the result of an execution.
-#' @return object Description.
-#' @export
-#' @docType methods
-#' @rdname Action.setMsgText-methods
-#' 
-#' @examples
-#' obj <- new("Action")
-#' v_msg <- character()
-#' Action.setMsgText(obj) <- v_msg
-#' @export
-setGeneric("Action.setMsgText<-",
-           function(object, value){standardGeneric("Action.setMsgText<-")})
-#' @rdname Action.setMsgText-methods
-#' @aliases Action.setMsgText,Action,Action-method
-setReplaceMethod( f="Action.setMsgText",
-                  signature="Action",
-                  definition=function(object, value)
-  {
-    object@msgText <- value
-    return(object)                       
-  }
-)
-#--- GETTER
-#' Action.getSuccess 
-#' 
-#' Description.
-#' 
-#' @param object    Description.
-#' @return success The returned value states the result of an execution, where 0 is success and any other number means that an issue happens.
-#' @export
-#' @docType methods
-#' @rdname Action.getSuccess-methods
-#' @examples
-#' obj <- new("Action")
-#' Action.getSuccess(obj)
-#' @export
-setGeneric("Action.getSuccess",
-           function(object){standardGeneric("Action.getSuccess")})
-#' @rdname Action.getSuccess-methods
-#' @aliases Action.getSuccess,Action,Action-method
-setMethod("Action.getSuccess",
-          "Action",
-          function(object){ return(object@success) }
-)
-#' Action.getMsgType 
-#' 
-#' Description.
-#' 
-#' @param object    Description.
-#' @return msgType The returned type defines the type of the execution message, where 'S' is success, 'E' error, 'W' warning and 'I' information.
-#' @export
-#' @docType methods
-#' @rdname Action.getMsgType-methods
-#' 
-#' @examples
-#' obj <- new("Action")
-#' Action.getMsgType(obj)
-#' @export
-setGeneric("Action.getMsgType",
-           function(object){standardGeneric("Action.getMsgType")})
-#' @rdname Action.getMsgType-methods
-#' @aliases Action.getMsgType,Action,Action-method
-setMethod("Action.getMsgType",
-          "Action",
-          function(object){ return(object@msgType) }
-)
-#' Action.getMsgText 
-#' 
-#' Description.
-#' 
-#' @param object    Description.
-#' @return msgText The returned string describes the result of an execution.
-#' @export
-#' @docType methods
-#' @rdname Action.getMsgText-methods
-#' 
-#' @examples
-#' obj <- new("Action")
-#' Action.getMsgText(obj)
-#' @export
-setGeneric("Action.getMsgText",
-           function(object){standardGeneric("Action.getMsgText")})
-#' @rdname Action.getMsgText-methods
-#' @aliases Action.getMsgText,Action,Action-method
-setMethod("Action.getMsgText",
-          "Action",
-          function(object){ return(object@msgText) }
-)
-
 #' Action.btnExecute
 #' 
 #' Description.
 #' 
-#' @param object Description.
-#' @param analysisFl A list with the paths of the CSV files.
-#' @return result The return states the number of results reached or zero when something went wrong.
+#' @param object Object instance.
+#' @param analysisFl Path and analysis file name.
+#' @return result Result of the execution of the last step described on the analysis file.
 #' @export
 #' @docType methods
 #' @rdname Action.btnExecute-methods
@@ -259,7 +97,7 @@ setMethod("Action.btnExecute",
             vCommand <- Analyz.getStepCommand(object@anlz)
 # STEP 6 get the current parameters
             vParms <- Analyz.getStepParameters(object@anlz)
-# STEP 7 run the command with the paraeters
+# STEP 7 run the command with the parameters > do.call(command(paramters))
             vResult <- Analyz.runAnalysis(object@anlz, vCommand, (vParms))
 # STEP 8 store the result
             Analyz.setResult(object@anlz) <- vResult
@@ -274,9 +112,9 @@ setMethod("Action.btnExecute",
 
 #' Action.btnExecuteEcho
 #' 
-#' Description.
+#' Method for conneciton testing purposes.
 #' 
-#' @param object Description.
+#' @param object Object instance.
 #' @param string A string to be "echoed".
 #' @return result The return is the string sent in the parameter string.
 #' @export
@@ -294,5 +132,5 @@ setGeneric("Action.btnExecuteEcho",
 #' @aliases Action.btnExecuteEcho,Action,Action-method
 setMethod("Action.btnExecuteEcho",
           "Action",
-          function(object, string){ return(string) }
+          function(object, string){ return(print(string)) }
 )
